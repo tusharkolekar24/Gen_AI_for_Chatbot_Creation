@@ -1,0 +1,47 @@
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+</head>
+<body>
+{% extends "base.html" %}
+
+    {% block form_container %}
+    <div class="form-container">
+        <h1>Parameters</h1>
+        <div class="sidebar-divider"></div>
+        <form action="{{ url_for('submit_home_form') }}" method="post" id="userForm">
+            <div class="form-group">
+                <label for="type_prompt">1.Type of Assistant</label>
+                <select id="type_prompt" name="type_prompt" required>
+                    {% for prompt in form_data.type_prompt %}
+                        <option value='{{ prompt }}'>{{prompt}}</option>
+                    {% endfor %}
+                </select>
+
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    {% endblock %}
+
+    {% block navbar_main %}
+        <h1>ChatBot Creation</h1>
+
+        <div class="main-container">
+            <div class="chat-box" id="chat-box">
+
+            </div>
+            
+            <div class="text-info">
+                <h1>Ask you Question</h1>
+                <!-- <textarea type="text" name="user-input" placeholder="Your question..." onkeypress="handleKeyPress(event)"></textarea> -->
+                <textarea id="user-input" name="user-input" placeholder="Your question..." onkeypress="handleKeyPress(event)"></textarea>
+                <button onclick="sendMessage()">Generate Info</button>
+            </div>
+
+        </div>
+
+    {% endblock %}
+</body>
